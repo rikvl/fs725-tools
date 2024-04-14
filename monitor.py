@@ -11,9 +11,6 @@ from fs725 import FS725Instrument
 from commands import fs725_commands
 
 
-COM_PORT = "/dev/ttyUSB0"
-
-
 def print_fs725_metrics(com_port, query_sel):
     """Print metrics of FS725 Rb Frequency Standard in Prometheus format
 
@@ -91,5 +88,6 @@ def print_metric(metric_name, value, description):
 
 
 if __name__ == "__main__":
-    query_sel = sys.argv[1:] if len(sys.argv) > 1 else ["all"]
-    sys.exit(print_fs725_metrics(com_port=COM_PORT, query_sel=query_sel))
+    com_port = sys.argv[1] if len(sys.argv) > 1 else "/dev/ttyUSB0"
+    query_sel = sys.argv[2:] if len(sys.argv) > 2 else ["all"]
+    sys.exit(print_fs725_metrics(com_port=com_port, query_sel=query_sel))
