@@ -11,6 +11,9 @@ from fs725 import FS725Instrument
 from commands import fs725_commands
 
 
+COM_PORT = "/dev/ttyUSB0"
+
+
 def print_fs725_metrics(com_port, query_sel):
     """Print metrics of FS725 Rb Frequency Standard in Prometheus format
 
@@ -49,11 +52,11 @@ def print_fs725_metrics(com_port, query_sel):
 def make_query_and_print(fs725, query):
     """Make a single query to the FS725 and print the resulting metric."""
 
-    metric_name = "fs725_" + query.description.lower().replace(" ", "_")
+    metric_name = f"fs725_{query.mnem}"
 
     value = fs725.getCurrentValue(query.mnem)
 
-    if type(query.rtn_type) == type:
+    if isinstance(query.rtn_type, type):
         print_metric(
             metric_name=metric_name,
             value=query.rtn_type(value),
@@ -63,9 +66,9 @@ def make_query_and_print(fs725, query):
         split_values = value.split(",")
         for ival, val in enumerate(split_values):
             print_metric(
-                metric_name=f"{metric_name}{ival + 1}",
+                metric_name=f"{metric_name}_{ival + 1}",
                 value=query.rtn_type[ival](val),
-                description=f"{query.description} {ival + 1}",
+                description=f"{query.description}: {ival + 1}",
             )
 
 
@@ -88,6 +91,5 @@ def print_metric(metric_name, value, description):
 
 
 if __name__ == "__main__":
-    com_port = "/dev/ttyUSB0"
-    query_sel = sys.argv[1:] if len(sys.argv) > 1 else ["sf"]
-    sys.exit(print_fs725_metrics(com_port=com_port, query_sel=query_sel))
+    query_sel = sys.argv[1:] if len(sys.argv) > 1 else ["all"]
+    sys.exit(print_fs725_metrics(com_port=COM_PORT, query_sel=query_sel))
