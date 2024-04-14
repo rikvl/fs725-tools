@@ -7,7 +7,8 @@ import sys
 
 from collections import OrderedDict
 
-from fs725 import FS725Instrument, fs725_commands
+from fs725 import FS725Instrument
+from commands import fs725_commands
 
 
 def print_fs725_metrics(com_port, query_sel):

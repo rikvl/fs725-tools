@@ -9,7 +9,8 @@ import prometheus_client as pc
 
 from collections import OrderedDict
 
-from fs725 import FS725Instrument, fs725_commands
+from fs725 import FS725Instrument
+from commands import fs725_commands
 
 
 PROMETHEUS_GW = "aux:9091"
