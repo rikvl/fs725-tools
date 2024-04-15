@@ -60,7 +60,7 @@ fs725_commands = OrderedDict({
     "ad7":  Cmd("ad7",    float,      "ADC Discharge lamp heater control voltage"),
     "ad8":  Cmd("ad8",    float,      "ADC Amplified AC photosignal"),
     "ad9":  Cmd("ad9",    float,      "ADC Photocell's I/V converter voltage / 4"),
-    "ad10": Cmd("ad10",   float,      "ADC Case temperature (10 mV/°C)"),
+    "ad10": Cmd("ad10",   float,      "ADC Case temperature (10 mV/degC)"),
     "ad11": Cmd("ad11",   float,      "ADC Crystal thermistors"),
     "ad12": Cmd("ad12",   float,      "ADC Cell thermistors"),
     "ad13": Cmd("ad13",   float,      "ADC Lamp thermistors"),
