@@ -50,9 +50,10 @@ class FS725Instrument:
             com = serial.Serial(
                 port=com_port,
                 baudrate=9600,
+                bytesize=serial.EIGHTBITS,
                 parity=serial.PARITY_NONE,
                 stopbits=serial.STOPBITS_ONE,
-                bytesize=serial.EIGHTBITS,
+                xonxoff=True,
             )
             com.isOpen()
             self.com = com
